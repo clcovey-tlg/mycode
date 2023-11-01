@@ -1,0 +1,72 @@
+{
+0:{
+'question': 'By adventuring, I am primarily...',
+'a': 'doing my part to put things right.',
+'b': 'rescuing the weak and helping the helpless.',
+'c': 'enjoying the thrill of the dangers faced.',
+'d': 'acquiring wealth and power through this experience.'
+},
+1:{
+'question': 'Were I not fit for an adventuring class, I would most likely be...',
+'a': 'a man-at-arms in a nearby castle.',
+'b': 'a bandit raiding the countryside.',
+'c': 'an herbalist treating the sick.',
+'d': 'a hermit living alone in the wilderness.'
+},
+2:{
+'question': 'My hero is...',
+'a': 'Robin Hood.',
+'b': 'King Arthur.',
+'c': 'Attilla the Hun.',
+'d': 'Darth Vader.'
+},
+3:{
+'question': 'I see myself more as...',
+'a': 'a soldier.',
+'b': 'a hero.',
+'c': 'an adventurer.',
+'d': 'a rogue.'
+},
+4:{
+'question': 'At the end of a successful venture...',
+'a': 'I kill everyone and take the loot.',
+'b': 'the party leaders begin planning another venture.',
+'c': 'I look for ways to help others.',
+'d': 'We say goodbye to each other, and I go relax my way.'
+},
+5:{
+'question': 'I believe...',
+'a': 'Careful planning is the surest way to assure success.',
+'b': 'Opportunities come to those flexible enough to grasp them.',
+'c': 'One should always be ready to help others.',
+'d': 'I should look out for number one.'
+},
+6:{
+'question': 'I believe...',
+'a': 'If people were free, crime would disappear.',
+'b': 'Prosperity for all is only possible where crime is controlled.',
+'c': 'Government makes it possible for the best people to rise to the top.',
+'d': 'The function of the police is to oppress those who are just trying to survive.'
+},
+7:{
+'question': 'I believe...',
+'a': 'No creature can ever claim ownership of any other creature.',
+'b': 'Stronger creatures use slavery to take advantage of the weak.',
+'c': 'Slavery is a reasonable solution to certain economic problems.',
+'d': 'Some people deserve to be served by others.'
+},
+8:{
+'question': 'I believe...',
+'a': 'The government which governs least governs best.',
+'b': 'The one who always does good need not fear the law.',
+'c': 'Without law, society would collapse.',
+'d': 'Any situation can be made to work to one's own advantage.'
+},
+9:{
+'question': 'I believe...',
+'a': 'Each of us has a duty to all of us.',
+'b': 'Each of us has a duty to our country and its government.',
+'c': 'Each of us has a duty to himself.',
+'d': 'There is no duty common to all.'
+}
+}
