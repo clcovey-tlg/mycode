@@ -4,6 +4,7 @@
 import json
 import os
 import time
+import textwrap
 
 # method to read questions from questions.txt file
 def read_questions():
@@ -18,6 +19,20 @@ def read_questions():
     # reconstructs data into a dictionary
     questions = json.loads(data)
     return questions
+
+# method to read alignment description from alignment_descriptions.txt file
+def read_descriptions():
+    # determines file path
+    file_dir = os.path.dirname(os.path.realpath(__file__))
+    os.chdir(file_dir)
+    
+    # reads data from the file
+    with open("alignment_descriptions.txt","r") as file:
+        data = file.read()
+    
+    # reconstructs data into a dictionary
+    descriptions = json.loads(data)
+    return descriptions
 
 # method to ask questions and record/return responses
 def test(questions):
@@ -111,8 +126,6 @@ def analyze_results(results):
     # determines scores for morality and ethics
     morality = results['good'] - results['evil']
     ethics = results['law'] - results['chaos']
-    print(f"***This is for testing\n***{results}")
-    print(f"***Morality - {morality}, Ethics - {ethics}")
 
     # assigns a alignment based upon scores
     alignment = ""
@@ -139,17 +152,24 @@ def analyze_results(results):
     return alignment
     
 
-def display_alignment(alignment):
-    # os.system("clear")
-    print(f"Your characters alignment is {alignment}")
-    print("Placeholder for alignment info. Info will be read from a text file")
+def display_alignment(alignment, descriptions):
+    os.system("clear")
+    # displays alignment along with a description
+    print(f"\x1B[4mYour characters alignment is {alignment}\x1B[0m")
+
+    # displays description in a more readable format with limited paragraph width
+    wrapper = textwrap.TextWrapper(width=50)
+    descrip = wrapper.fill(text=descriptions[alignment])
+    print(descrip)
+    #print(descriptions[alignment])
 
 def main():
     questions = read_questions()
+    descriptions = read_descriptions()
     responses = test(questions)
     results = score_responses(responses)
     alignment = analyze_results(results)
-    display_alignment(alignment)
+    display_alignment(alignment, descriptions)
 
 if __name__ == "__main__":
 	main()
