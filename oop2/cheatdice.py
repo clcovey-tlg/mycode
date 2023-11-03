@@ -33,3 +33,19 @@ class Cheat_Loaded_Dice(Player): # inheritance of Player
                 self.dice[i] += 1
             i += 1
 
+# allows user to take a mulligan (reroll) when sum is less than 9
+class Cheat_Mulligan(Player):
+    def cheat(self):
+        while sum(self.dice) <= 9:
+            self.roll()
+
+# allows user to roll 4 dice
+class Cheat_Additional_Die(Player):
+    def cheat(self):
+        self.dice.append(randint(1,6))
+
+# allows the user to weight the first dice to always above 4
+class Cheat_Weight(Player):
+    def cheat(self):
+        while self.dice[0] < 4:
+            self.dice[0] = randint(1,6)
