@@ -1,0 +1,57 @@
+{
+	"locations": [
+		{	
+			"index": "cell",
+			"name": "your cell",
+			"description": "This is your cell generic description.",
+			"connections": {
+				"north": "hall"
+				},
+			"inventory": [],
+			"entities": {}
+		},
+		{
+			"index": "hall",
+			"name": "the hall",
+			"description": "This is the hall generic description.",
+			"connections": {
+				"east": "stairs",
+				"west": "empty cell"
+				},
+			"inventory": [],
+			"entities": {}
+		},
+		{
+			"index": "empty cell",
+			"name": "an empty cell",
+			"description": "This is the empty cell generic description.",
+			"connections": {
+				"east": "hall"
+				},
+			"inventory": ["loose stone"],
+			"entities": {}
+		},
+		{
+			"index": "escape tunnel",
+			"name": "an escape tunnel",
+			"description": "This is the escape tunnel generic description.",
+			"connections": {
+				"north": "empty cell",
+				"east": "exit"
+				},
+			"inventory": [],
+			"entities": {}
+		},
+		{
+			"index": "guard room",
+			"name": "the guard room",
+			"description": "This is the guard room generic description.",
+			"connections": {
+				"west": "stairs",
+				"east": "exit"
+				},
+			"inventory": [],
+			"entities": {}
+		}
+	]
+}
