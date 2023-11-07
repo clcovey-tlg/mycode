@@ -3,6 +3,7 @@
 # import needed classes and function
 from entity import Entity
 import json
+from pprint import pprint
 
 # define location class
 class Location():
@@ -23,23 +24,27 @@ def location_status(locations, current_loc):
         print("---------------------------")
         print("Looking around you see:")
         for key, value in locations[current_loc]['connections'].items():
-             print(f"Direction: {key} - {value}")
+            print(f"Direction: {key} - {value}")
         print("---------------------------")
 
-# define main class for testing
-def main():
-    locations = {}
+def load_locations():
     with open("game_data.txt", "r") as data:
         #reads data file object as json
         game_data = json.load(data)
-        
-        # reads locations and saves in a locations dict
+            
+        # reads locations from game_data.txt and saves in a locations dict
+        locations = {}
         for location in game_data["locations"]:
             loc_name = location["index"]
             locations[loc_name] = location
-        #print(locations)
-    current_location = "hall"
-    location_status(locations, current_location)
+    
+    return locations
+
+
+# define main class for testing
+def main():
+    locations = load_locations()
+    location_status(locations, "cell")
 
 if __name__ == "__main__":
     main()

@@ -1,18 +1,49 @@
 #!/usr/bin/env python3
 
 # import necessary modules
-from actions import roll_dice
+import json
 
 
 # define parent class for an entity
 class Entity():
+    """
+    A class used to represent an Entity
+
+    ...
+
+    Attributes
+    ----------
+    index : str
+        an index to be used as a reference for the entity
+    name : str
+        a formatted string for displaying the entity name
+    group : str
+        the group to which the entity belongs (i.e. beast, humanoid)
+    max_health : int
+        the maximum health of the entity
+    health : int
+        the current health of the entity
+    strength : int
+        a representation of the physical strength of the entity
+    dexterity : int
+        a representation of agility, reflexes, and balance of the entity
+    ac : int
+        a representation of how easy/difficult an entity is to hit
+
+    Methods
+    -------
+    says(sound=None)
+        Prints the animals name and what sound it makes
+    """
     def __init__(self):
-        self.race: str
+        self.index: str
+        self.name: str
+        self.group: str
         self.max_health: int
         self.health: int
         self.strength: int
         self.dexerity: int
-        self.intelligence: int
+        self.ac: int
         self.inventory: list[str] = []
         self.location: str
 
@@ -46,21 +77,22 @@ class Entity():
 
 # define child class for a monster from entity
 class NPC(Entity):
-    def __init__(self, group: str, race: str, hp_die_number: int, hp_die_type: int, str_die_number: int, str_die_type: int, dex_die_number: int, dex_die_type: int, int_die_number: int, int_die_type: int, location: str):
+    def __init__(self, location):
         # keep the attributes from Entity
         super().__init__()
-        self.group: str = group
-        self.race: str = race
-        self.max_health = sum(roll_dice(hp_die_number, hp_die_type))
-        self.health = self.max_health
-        self.strength: int = sum(roll_dice(str_die_number, str_die_type))
-        self.dexerity: int = sum(roll_dice(dex_die_number, dex_die_type))
-        self.intelligence: int = sum(roll_dice(int_die_number, int_die_type))
-        self.location: str = location
+        self.index: str
+        self.name: str
+        self.group: str
+        self.max_health: int
+        self.health: int
+        self.strength: int
+        self.dexerity: int
+        self.inventory: list[str] = []
+        self.location: str
 
 # define child class of player from entity
 class Player(Entity):
-     def __init__(self, name: str, location: str):
+    def __init__(self, name: str, location: str):
         # keep the attributes from Entity
         super().__init__()
         self.race: str = "Human"
@@ -68,18 +100,13 @@ class Player(Entity):
         self.max_health = 20
         self.strength = 10
         self.dexerity = 10
-        self.intelligence = 10
         self.health = self.max_health
         self.location: str = location
 
 def main():
-     player = Player("Ezok", "default")
-     player.inventory.append("sword")
-     print(player.__str__())
-     rat = NPC("monster","rodent", 3, 1, 1, 1, 6, 1, 1, 1, "default")
-     print(rat.__str__())
-     guard = NPC("guard","human", 3, 1, 1, 1, 6, 1, 1, 1, "default")
-     print(guard.__str__())
+    player = Player("Ezok", "cell")
+    player.inventory.append("sword")
+    print(player.__str__())
 
 if __name__ == "__main__":
 	main()
