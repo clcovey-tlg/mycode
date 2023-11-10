@@ -5,6 +5,7 @@ from generate_entity import generate_player, load_npcs
 from actions import showInstructions
 from battle import battle
 from format_txt import underline, make_blue
+import os
 
 # initialize global variables
 locations = {}
@@ -31,9 +32,12 @@ def play_game(locations, npcs, player):
     while not (player_dead or escaped):
         location_status(locations, player.location)
 
+        print()
+        player.display()
+
         user_input = ''
         while user_input == '':
-            print(f"Actions: {make_blue('Move <direction>')}, {make_blue('Search')}")
+            print(f"\nActions: {make_blue('Move <direction>')}, {make_blue('Search')}")
             user_input = input('>')
 
         user_input_list = user_input.lower().split(" ", 1)
@@ -74,7 +78,10 @@ def play_game(locations, npcs, player):
 
         ## Define how a player can win
         if player.location == 'exit':
-            print('You escaped the dungeon... YOU WIN!')
+            os.system("clear")
+            location_search(locations, "exit")
+            print('\nYou escaped the dungeon... YOU WIN!')
+            input("Press enter to leave the game")
             escaped = True
 
 def main():

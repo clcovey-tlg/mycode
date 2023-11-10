@@ -56,7 +56,7 @@ class Entity():
             print(f"NPC: {self.name}, Type: {self.group}")
         print("\x1B[4mStats\x1B[0m")
         print(f"Max Health: {self.max_hp}, Current Health: {self.hp}")
-        print(f"Strength: {self.strength}, Damage: {self.damage}")
+        print(f"Strength: {self.strength}, Damage: {self.damage} + {max(0, (self.strength - 10) // 2)}")
         print(f"Dexterity: {self.dexterity}, Armor Class: {self.ac}")
         if self.inventory == []:
             print(f"Inventory: Empty")
@@ -138,12 +138,12 @@ class Player(Entity):
         super().__init__()
         self.race: str = "Human"
         self.name: str = name
-        self.max_hp = 20
-        self.hp = self.max_hp
-        self.strength = 14
-        self.damage: str = "1d6"
-        self.dexterity = 14
-        self.ac: int = 10 + int((self.dexterity - 10) / 2)
+        self.max_hp: int = 20
+        self.hp: int = self.max_hp
+        self.strength: int = 0
+        self.damage: str = "1d4"
+        self.dexterity: int = 0
+        self.ac: int
         self.inventory: list[str] = []
         self.location: str = location
         

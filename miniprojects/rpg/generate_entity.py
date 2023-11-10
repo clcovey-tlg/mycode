@@ -137,6 +137,7 @@ def generate_player_stats(player):
     else:
         setattr(player, "strength", stats[1])
         setattr(player, "dexterity", stats[0])
+    setattr(player, "ac", 10 + (player.dexterity - 10) // 2)
 
 # generate the Player object
 def generate_player():

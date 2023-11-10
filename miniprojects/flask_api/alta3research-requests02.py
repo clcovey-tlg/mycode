@@ -35,7 +35,7 @@ def display_json_monster_detail(name):
         print(f"{key.capitalize()}: {monster[key]}")
 
 def main():
-    #display_json_monsters()
+    #!/usr/bin/env python3display_json_monsters()
     display_json_monster_detail("Rat")
 
 if __name__ == "__main__":

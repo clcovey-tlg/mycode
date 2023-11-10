@@ -75,7 +75,7 @@
 			"index": "exit",
 			"name": "the exit",
 			"description": "You find yourself standing before the exit—a portal to the outside world that beckons with the promise of liberation.",
-			"details": "The exit is framed by an ancient, towering archway, its stones weathered by the passage of time and the weight of countless adventures. A soft, ambient light spills through the opening, revealing a stark contrast to the dimly lit passages you leave behind. The air is fresh, carrying the scent of pine and earth, a welcome departure from the dungeon's stale atmosphere. To the west you see a guard room. To the south-west you see an escape tunnel",
+			"details": "The exit is framed by an ancient, towering archway, its stones weathered by the passage of time and the weight of countless adventures. A soft, ambient light spills through the opening, revealing a stark contrast to the dimly lit passages you leave behind. The air is fresh, carrying the scent of pine and earth, a welcome departure from the dungeon's stale atmosphere.",
 			"connections": {
 				"west": "guard room",
 				"south-west": "escape tunnel"
