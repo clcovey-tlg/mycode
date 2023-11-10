@@ -50,7 +50,7 @@ class Entity():
         self.location: str
 
     # method to define __str__ for entities
-    def __str__(self):
+    def display(self):
         if self.__class__.__name__ == "Player":
             print(f"Name: {self.name}, Type: {self.__class__.__name__}, Race: {self.race}")
         else:
@@ -74,21 +74,6 @@ class Entity():
         else:
             locations[self.location]["entities"] #remove from current location
             self.location = new_location
-            
-
-    # method for an entity to attack
-    def attack(self, target):
-        roll = roll_dice()
-        mod = int((self.dexterity - 10) / 2)
-        atk = roll + mod
-        if atk > target.ac:
-            damage = roll_dice(self.damage)
-            target.hp -= damage
-            print(f"You hit the {target.name} for {damage} damage")
-            if target.hp <= 0:
-                print(f"You have killed the {target.name}")
-        else:
-            print("You miss")
 
 # define child class for a monster from entity
 class NPC(Entity):
@@ -119,7 +104,7 @@ class Player(Entity):
         self.strength = 14
         self.damage: str = "1d6"
         self.dexterity = 14
-        self.ac: int = 10
+        self.ac: int = 10 + int((self.dexterity - 10) / 2)
         self.inventory: list[str] = []
         self.location: str = location
         
@@ -131,7 +116,6 @@ def main():
     setattr(rat, "hp", 1)
     setattr(rat, "ac", 11)
     setattr(rat, "name", "Rat")
-    player.attack(rat)
 
 if __name__ == "__main__":
 	main()

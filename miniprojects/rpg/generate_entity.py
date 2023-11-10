@@ -33,7 +33,7 @@ def get_npc_data(npc, location, damage):
 
 def generate_npc(locations, npc, location, damage):
     npc = get_npc_data(npc, location, damage)
-    locations[location]["entities"][npc.index] = npc
+    locations[location]["entities"][npc.index] = npc.index
 
     return npc
 
@@ -60,8 +60,8 @@ def generate_player_name():
     while not acceptable:
         name = input("Please enter your characters name: \n> ")
         print(f"You entered: {name}")
-        accept = input("Press enter to keep or enter 'no' to enter a new name\n> ").lower()
-        if accept not in ["no", "n"]:
+        accept = input("Press enter to change or enter 'yes' to keep this name\n> ").lower()
+        if accept in ["yes", "ye", "y"]:
              acceptable = True
     return name
 
@@ -77,8 +77,8 @@ def generate_player_stats(player):
         stats.append(roll_dice("3d6") + 3)
         time.sleep(1)
         print(f"You rolled a {stats[0]} and a {stats[1]}")
-        accept = input("Press enter to keep or enter 'no' to roll again\n> ").lower()
-        if accept not in ["no", "n"]:
+        accept = input("Press enter to keep reroll or enter 'yes' to keep these rolls\n> ").lower()
+        if accept in ["yes", "ye", "y"]:
              acceptable = True
     
     # allows player to assign stats to strength or dexterity

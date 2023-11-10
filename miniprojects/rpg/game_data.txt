@@ -18,7 +18,8 @@
 			"details": "The uneven flagstone floor echoes with the distant drip of water, creating a haunting rhythm that resonates through the subterranean passageway. Cobwebs drape from the corners, evidence of the passage of time undisturbed. The occasional rat scurries in the darkness, its tiny claws echoing through the eerie stillness. To the west you see an empty cell. To the east you see stairs.",
 			"connections": {
 				"east": "stairs",
-				"west": "empty cell"
+				"west": "empty cell",
+				"south": "cell"
 				},
 			"inventory": [],
 			"entities": {}

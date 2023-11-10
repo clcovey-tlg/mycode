@@ -5,6 +5,7 @@ from entity import Entity
 import json
 from pprint import pprint
 from textwrap import fill
+import os
 
 # define location class
 class Location():
@@ -15,9 +16,10 @@ class Location():
         self.details: str = details
         self.connections: dict[str, str] = connections
         self.inventory: list[str] = inventory
-        self.entities: Entity = []
+        self.entities: list[str] = []
 
 def location_status(locations, current_loc):
+    os.system("clear")
     '''function to display location'''
     # sets the current location object
     current_loc_entry = locations[current_loc]
@@ -45,8 +47,10 @@ def location_status(locations, current_loc):
 
 def location_search(locations, current_loc):
     current_loc_entry = locations[current_loc]
-    print("Your take a closer look at your surrondings")
+    os.system("clear")
+    print("Your take a closer look at your surrondings...")
     print(fill(current_loc_entry['details'], width=50))
+    print("\n")
 
 def load_locations():
     with open("game_data.txt", "r") as data:
