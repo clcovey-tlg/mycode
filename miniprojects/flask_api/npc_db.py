@@ -6,16 +6,17 @@ API_URL = "https://www.dnd5eapi.co"
 file_path = "files/dnde.db"
 
 def npc_lookup(base_url, url_ext=""):
-    """Fetches information about non-player characters (NPCs) from the D&D 5e API.
+    """
+    Perform a lookup on the D&D 5e API to retrieve information about monsters.
 
     Args:
-        base_url (str): The base URL of the D&D 5e API.
-        url_ext (str): The specific URL extension for a particular NPC, if applicable.
+    base_url (str): The base URL of the D&D 5e API.
+    url_ext (str): The URL extension for a specific monster (default is an empty string).
 
     Returns:
-        dict or list: If url_ext is empty, returns a list of dictionaries representing NPCs.
-                     If url_ext is provided, returns a dictionary representing details of a specific NPC.
-                     Returns False if an error occurs during the request.
+    Union[list, dict, bool]: If url_ext is empty, returns a list of monsters from the API.
+                             If url_ext is provided, returns the details of a specific monster.
+                             Returns False if the request fails.
     """
     url = ""
     if url_ext == "":
@@ -33,14 +34,15 @@ def npc_lookup(base_url, url_ext=""):
         return False
 
 def create_inital_table(data_set, path):
-    """Creates the initial database table and populates it with data from the D&D 5e API.
+    """
+    Create an initial SQLite table for monsters based on the provided data set.
 
     Args:
-        data_set (list): List of dictionaries representing NPCs from the D&D 5e API.
-        path (str): The path to the SQLite database file.
+    data_set (list): List of monsters from the D&D 5e API.
+    path (str): Path to the SQLite database file.
 
     Returns:
-        bool: True if the operation is successful, False otherwise.
+    bool: True if the operation is successful, False otherwise.
     """
     conn = sqlite3.connect(path)
     cursor = conn.cursor()
@@ -71,13 +73,14 @@ def create_inital_table(data_set, path):
         conn.close()
 
 def populate_npc_data(path):
-    """Populates additional data for NPCs in the database, such as category, stats, and image.
+    """
+    Populate additional data for monsters in the SQLite table.
 
     Args:
-        path (str): The path to the SQLite database file.
+    path (str): Path to the SQLite database file.
 
     Returns:
-        bool: True if the operation is successful, False otherwise.
+    bool: True if the operation is successful, False otherwise.
     """
     print("Please wait while the monster db is being populated...")
     conn = sqlite3.connect(path)
@@ -116,13 +119,14 @@ def populate_npc_data(path):
         conn.close()
 
 def db_count(path):
-    """Gets the count of records in the monster_table of the database.
+    """
+    Get the count of records in the monster_table.
 
     Args:
-        path (str): The path to the SQLite database file.
+    path (str): Path to the SQLite database file.
 
     Returns:
-        int: The count of records in the monster_table.
+    int: The count of records in the monster_table.
     """
     count = 0
     conn = sqlite3.connect(path)
@@ -135,10 +139,14 @@ def db_count(path):
         conn.close()
 
 def table_erase(path):
-    """Erases all records from the monster_table in the database.
+    """
+    Erase all records from the monster_table.
 
     Args:
-        path (str): The path to the SQLite database file.
+    path (str): Path to the SQLite database file.
+
+    Returns:
+    None
     """
     conn = sqlite3.connect(path)
     cursor = conn.cursor()
@@ -147,10 +155,14 @@ def table_erase(path):
     conn.close()
 
 def verify_db(path):
-    """Verifies the integrity of the database, updating and recreating the table if necessary.
+    """
+    Verify the integrity of the database and perform necessary actions to ensure consistency.
 
     Args:
-        path (str): The path to the SQLite database file.
+    path (str): Path to the SQLite database file.
+
+    Returns:
+    None
     """
     results = npc_lookup(API_URL)
     api_count = len(results)
@@ -165,7 +177,6 @@ def verify_db(path):
         populate_npc_data(path)
 
 def main():
-    """Main function to verify and update the monster database."""
     verify_db(file_path)
 
 if __name__ == "__main__":

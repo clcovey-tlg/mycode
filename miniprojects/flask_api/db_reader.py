@@ -3,20 +3,20 @@
 import sqlite3
 
 def db_reader(path, table):
-    """Reads data from a SQLite database table and returns it as a list of dictionaries.
+    """
+    Read records from the specified table in the SQLite database.
 
     Args:
-        path (str): The path to the SQLite database file.
-        table (str): The name of the table to read data from.
+    path (str): Path to the SQLite database file.
+    table (str): Name of the table to read records from.
 
     Returns:
-        list: A list of dictionaries, where each dictionary represents a row in the database table.
+    List[Dict]: List of dictionaries representing each record in the table.
     """
     conn = sqlite3.connect(path)
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
 
-    # pull all records from the supplied table
     cursor.execute(f"SELECT * FROM {table}")
 
     monsters = cursor.fetchall()

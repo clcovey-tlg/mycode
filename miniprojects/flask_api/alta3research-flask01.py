@@ -11,42 +11,46 @@ app = Flask(__name__)
 
 @app.route("/index")
 def index():
-    """Render the index page of the web application.
+    """
+    Render the index.html template.
 
     Returns:
-        str: Rendered HTML content for the index page.
+    flask.Response: Rendered index.html template.
     """
     return render_template("index.html")
 
 @app.route("/monsters")
 def display_monsters():
-    """Fetches and displays monster data from a database and renders the monsters page.
+    """
+    Display a list of monsters retrieved from the database using the db_reader function.
 
     Returns:
-        str: Rendered HTML content for the monsters page.
+    flask.Response: Rendered monsters.html template with the list of monsters.
     """
     monsters = db_reader(file_path, table)
     return render_template("monsters.html", monsters = monsters)
 
 @app.route("/monsters/json")
 def display_monsters_json():
-    """Fetches and returns monster data in JSON format from a database.
+    """
+    Display a JSON representation of the list of monsters retrieved from the database using the db_reader function.
 
     Returns:
-        str: JSON representation of monster data.
+    dict: JSON representation of the list of monsters.
     """
     monsters = db_reader(file_path, table)
     return monsters
 
 @app.route("/monster/<name>")
 def monster_detail(name):
-    """Fetches details of a specific monster by name from a database and renders the monster detail page.
+    """
+    Display details of a specific monster based on the provided name.
 
     Args:
-        name (str): The name of the monster to retrieve details for.
+    name (str): The name of the monster.
 
     Returns:
-        str: Rendered HTML content for the monster detail page.
+    flask.Response: Rendered monster_detail.html template with details of the specified monster.
     """
     monsters = db_reader(file_path, table)
     monster = {}
@@ -57,6 +61,15 @@ def monster_detail(name):
 
 @app.route("/monster/<name>/json")
 def monster_detail_json(name):
+    """
+    Display a JSON representation of details of a specific monster based on the provided name.
+
+    Args:
+    name (str): The name of the monster.
+
+    Returns:
+    dict: JSON representation of details of the specified monster.
+    """
     monsters = db_reader(file_path, table)
     monster = {}
     for mon in monsters:
