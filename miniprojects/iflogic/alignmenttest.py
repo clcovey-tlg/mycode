@@ -8,35 +8,48 @@ import textwrap
 
 # method to read questions from questions.txt file
 def read_questions():
-    # determines file path
+    """
+    Read questions from the 'questions.txt' file and reconstructs them into a dictionary.
+
+    Returns:
+    Dict: Dictionary containing questions and answer choices.
+    """
     file_dir = os.path.dirname(os.path.realpath(__file__))
     os.chdir(file_dir)
     
-    # reads data from the file
     with open("questions.txt","r") as file:
         data = file.read()
     
-    # reconstructs data into a dictionary
     questions = json.loads(data)
     return questions
 
-# method to read alignment description from alignment_descriptions.txt file
 def read_descriptions():
-    # determines file path
+    """
+    Read alignment descriptions from the 'alignment_descriptions.txt' file and reconstructs
+    them into a dictionary.
+
+    Returns:
+    Dict: Dictionary containing alignment descriptions.
+    """
     file_dir = os.path.dirname(os.path.realpath(__file__))
     os.chdir(file_dir)
     
-    # reads data from the file
     with open("alignment_descriptions.txt","r") as file:
         data = file.read()
     
-    # reconstructs data into a dictionary
     descriptions = json.loads(data)
     return descriptions
 
-# method to ask questions and record/return responses
 def test(questions):
-    # displays a message to user
+    """
+    Ask questions and record/return responses.
+
+    Args:
+    questions (Dict): Dictionary containing questions and answer choices.
+
+    Returns:
+    list: List of responses for scoring.
+    """
     os.system("clear")
     print("""
 This test will determine the alignment of your D&D character.
@@ -44,10 +57,8 @@ Please base your responses on how your character would respond.
 These choices might not necessarily align with your personal beliefs\n""")
     input("Please press enter to continue with the test.")
 
-    # creates an empty list to store responses
     responses = []
 
-    # iterates through questions and records responses 
     keys = list(questions)
     i = 0
     while i < len(questions):
@@ -59,18 +70,23 @@ These choices might not necessarily align with your personal beliefs\n""")
         print(f"\tC) {questions[keys[i]]['c']}")
         print(f"\tD) {questions[keys[i]]['d']}")
 
-        # ensure response is a valid choice
         while response not in ("a","b","c","d"):
             response = input("Please choose A, B, C, or D\n> ").lower()       
         
-        # stores response
         responses.append(response)
         i += 1
-    # returns a list of resposes for scoring
     return responses
 
 def score_responses(responses):
-    # display a message to user and pauses for 3 seconds
+    """
+    Score the responses and return a dictionary with scores for morality and ethics.
+
+    Args:
+    responses (list): List of responses for scoring.
+
+    Returns:
+    Dict: Dictionary containing scores for morality and ethics.
+    """
     os.system("clear")
     print("Calculating results. Please wait...")
     time.sleep(3)
@@ -81,7 +97,6 @@ def score_responses(responses):
     good = 0
     evil = 0
 
-    #scores responses
     i = 0
     while i < len(responses):
         if i == 2 or i == 6:
@@ -123,7 +138,15 @@ def score_responses(responses):
     
 
 def analyze_results(results):
-    # determines scores for morality and ethics
+    """
+    Analyze the results and determine the character's alignment.
+
+    Args:
+    results (Dict): Dictionary containing scores for morality and ethics.
+
+    Returns:
+    str: Character's alignment.
+    """
     morality = results['good'] - results['evil']
     ethics = results['law'] - results['chaos']
 
@@ -153,16 +176,30 @@ def analyze_results(results):
     
 
 def display_alignment(alignment, descriptions):
+    """
+    Display the character's alignment along with a description.
+
+    Args:
+    alignment (str): Character's alignment.
+    descriptions (Dict): Dictionary containing alignment descriptions.
+
+    Returns:
+    None
+    """
     os.system("clear")
-    # displays alignment along with a description
     print(f"\x1B[4mYour characters alignment is {alignment}\x1B[0m")
 
-    # displays description in a more readable format with limited paragraph width
     wrapper = textwrap.TextWrapper(width=50)
     descrip = wrapper.fill(text=descriptions[alignment])
     print(descrip)
 
 def take_test():
+    """
+    Perform the alignment test, analyze results, and display the character's alignment.
+
+    Returns:
+    str: Character's alignment.
+    """
     questions = read_questions()
     descriptions = read_descriptions()
     responses = test(questions)
@@ -173,6 +210,12 @@ def take_test():
     return alignment
 
 def main():
+    """
+    Main function to execute the alignment test.
+
+    Returns:
+    None
+    """
     alignment = take_test()
     print(alignment)
 
