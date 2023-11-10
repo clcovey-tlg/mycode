@@ -49,8 +49,10 @@ class Entity():
         self.inventory: list[str] = []
         self.location: str
 
-    # method to define __str__ for entities
     def display(self):
+        """
+        Prints the attributes and stats of an entity in a formatted manner.
+        """
         if self.__class__.__name__ == "Player":
             print(f"Name: {self.name}, Type: {self.__class__.__name__}, Race: {self.race}")
         else:
@@ -69,6 +71,16 @@ class Entity():
 
     # method for an entity to move
     def move(self, locations, new_location):
+        """
+        Moves the entity to a new location.
+
+        Parameters:
+        - locations: The dictionary containing information about locations in the game.
+        - new_location: The name of the new location to move the entity to.
+
+        If the entity is a player, the location is updated directly.
+        If the entity is an NPC, it is removed from the current location's entities list and added to the new location.
+        """
         if self.__class__.__name__ == "Player":
             self.location = new_location
         else:
@@ -77,6 +89,21 @@ class Entity():
 
 # define child class for a monster from entity
 class NPC(Entity):
+    """
+    A class used to represent a Non-Player Character (NPC) entity, inheriting from Entity.
+
+    ...
+
+    Attributes
+    ----------
+    Inherits attributes from the parent class Entity and adds:
+    damage : str
+        the damage capability of the NPC
+
+    Methods
+    -------
+    None
+    """
     def __init__(self, location: str, damage: str):
         # keep the attributes from Entity
         super().__init__()
@@ -94,6 +121,21 @@ class NPC(Entity):
 
 # define child class of player from entity
 class Player(Entity):
+    """
+    A class used to represent a Player entity, inheriting from Entity.
+
+    ...
+
+    Attributes
+    ----------
+    Inherits attributes from the parent class Entity and adds:
+    race : str
+        the race of the player
+
+    Methods
+    -------
+    None
+    """
     def __init__(self, name: str, location: str):
         # keep the attributes from Entity
         super().__init__()

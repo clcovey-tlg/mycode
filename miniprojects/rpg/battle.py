@@ -5,13 +5,19 @@ from actions import roll_dice
 from pprint import pprint
 from format_txt import make_red, make_green, make_blue, underline
 
-# method for an entity to attack
 def attack(attacker, target):
+    """
+    Simulates an attack between two entities and updates their health accordingly.
+
+    Parameters:
+    - attacker: The attacking entity.
+    - target: The entity being attacked.
+
+    Prints the outcome of the attack.
+    """
     roll = roll_dice()
-    dam_mod = int((attacker.strength - 10) / 2)
-    if dam_mod < 0:
-        dam_mod = 0
-    atk_mod = int((attacker.dexterity - 10) / 2)
+    dam_mod = max(0, (attacker.strength - 10) // 2)
+    atk_mod = (attacker.dexterity - 10) // 2
     atk = roll + atk_mod
     print(f"{attacker.name} rolled a {atk}. {target.name} has an armor class of {target.ac}")
     if atk > target.ac:
@@ -25,12 +31,19 @@ def attack(attacker, target):
         print(f"{make_green(attacker.name)} has {make_red('missed')}")
 
 def battle(player, monster, locations):
-    player_dam_mod = int((player.strength - 10) / 2)
-    if player_dam_mod < 0:
-        player_dam_mod = 0
-    monster_dam_mod = int((monster.strength - 10) / 2)
-    if monster_dam_mod < 0:
-        monster_dam_mod = 0
+    """
+    Simulates a battle between the player and a monster.
+
+    Parameters:
+    - player: The player entity.
+    - monster: The monster entity.
+    - locations: The dictionary containing information about locations in the game.
+
+    Returns:
+    - bool: True if the player is killed, False if the monster is killed.
+    """
+    player_dam_mod = max(0, (player.strength - 10) // 2)
+    monster_dam_mod = max(0, (monster.strength - 10) // 2)
     input(f"\nThe battle with the {monster.name} begins! Press enter")
     while True:
         os.system("clear")

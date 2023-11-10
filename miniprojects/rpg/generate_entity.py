@@ -10,6 +10,17 @@ from entity import Player
 
 # function to retrieve npc data from api
 def get_npc_data(npc, location, damage):
+    """
+    Retrieves data for an NPC from the D&D 5e API and creates an NPC object.
+
+    Parameters:
+    - npc (str): The name of the NPC.
+    - location (str): The location where the NPC will be generated.
+    - damage (str): The damage capability of the NPC.
+
+    Returns:
+    - NPC: The generated NPC object.
+    """
     # build api url
     api_url = "https://www.dnd5eapi.co/api/monsters/" + npc
 
@@ -32,12 +43,33 @@ def get_npc_data(npc, location, damage):
     return npc
 
 def generate_npc(locations, npc, location, damage):
+    """
+    Generates an NPC, retrieves data from the D&D 5e API, and adds it to the specified location.
+
+    Parameters:
+    - locations (dict): Dictionary containing information about game locations.
+    - npc (str): The name of the NPC.
+    - location (str): The location where the NPC will be generated.
+    - damage (str): The damage capability of the NPC.
+
+    Returns:
+    - NPC: The generated NPC object.
+    """
     npc = get_npc_data(npc, location, damage)
     locations[location]["entities"][npc.index] = npc.index
 
     return npc
 
 def load_npcs(locations):
+    """
+    Loads NPC data from the game_data.txt file and generates NPC objects.
+
+    Parameters:
+    - locations (dict): Dictionary containing information about game locations.
+
+    Returns:
+    - dict: Dictionary containing generated NPC objects.
+    """
     with open("game_data.txt", "r") as data:
         #reads data file object as json
         game_data = json.load(data)
@@ -54,6 +86,12 @@ def load_npcs(locations):
 
 # generate Player name with input from user
 def generate_player_name():
+    """
+    Prompts the user to enter a character name and allows them to accept or change it.
+
+    Returns:
+    - str: The generated player name.
+    """
     # prompt for name
     name: str = ""
     acceptable: bool = False
@@ -67,6 +105,15 @@ def generate_player_name():
 
 # generate player stats
 def generate_player_stats(player):
+    """
+    Rolls dice to generate random stat values for the player.
+
+    Parameters:
+    - player (Player): The player entity.
+
+    Returns:
+    - None
+    """
     # rolls dice for stat values
     stats: list[int, int] = []
     acceptable: bool = False
@@ -94,14 +141,22 @@ def generate_player_stats(player):
 
 # generate the Player object
 def generate_player():
+    """
+    Generates a Player object with a name and random stats.
+
+    Returns:
+    - Player: The generated Player object.
+    """
     name = generate_player_name()
     player = Player(name, "cell")
     generate_player_stats(player)
 
     return player
 
-# main method for testing of function during testing
 def main():
+    """
+    Main function for testing purposes.
+    """
     # guard = get_npc_data("guard", "guard room", "1d6")
     # rat = get_npc_data("rat", "escape tunnel", "1d1")
     # skeleton = get_npc_data("skeleton", "escape tunnel", "1d6")

@@ -14,6 +14,17 @@ npcs = {}
 
 
 def play_game(locations, npcs, player):
+    """
+    Main function to play the game, handling user input and game progression.
+
+    Parameters:
+    - locations (dict): Dictionary containing information about game locations.
+    - npcs (dict): Dictionary containing information about Non-Player Characters (NPCs).
+    - player (Player): The player entity.
+
+    Returns:
+    - None
+    """
     # two conditions checked for ending game
     player_dead = False
     escaped = False
@@ -79,6 +90,9 @@ def play_game(locations, npcs, player):
             escaped = True
 
 def main():
+    """
+    Main function to initialize and play the game.
+    """
     # shows instructions. function from actions.py
     showInstructions()
 
