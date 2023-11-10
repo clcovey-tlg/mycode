@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 
-# needed imports
 from requests import get
 import time
 import json
@@ -164,8 +163,6 @@ def main():
 
     player = generate_player()
     print(player)
-
-    
 
 if __name__ == "__main__":
 	main()

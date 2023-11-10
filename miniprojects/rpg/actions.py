@@ -19,8 +19,11 @@ def roll_dice(roll: str = "1d20"):
     >>> roll_dice("3d6")
     10
     """
+    # Split the input string into number of dice and number of sides
     roll: list[str, str] = roll.split('d')
     dice: list[int] = []
+
+    # Roll the dice and store the results in a list
     for i in range(int(roll[0])):
          dice.append(randint(1,int(roll[1])))
     return sum(dice)
@@ -40,6 +43,7 @@ def showInstructions():
         For example, a strength of 14 will give +2 damage - (14 - 10) / 2
     """
     os.system("clear")
+    # Display game instructions and information concerning player stats
     print('''
     The Escape
     ==========

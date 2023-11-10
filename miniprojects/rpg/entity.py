@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 
-# import necessary modules
-from actions import roll_dice
-
 # define parent class for an entity
 class Entity():
     """

@@ -16,10 +16,14 @@ def attack(attacker, target):
     Prints the outcome of the attack.
     """
     roll = roll_dice()
+
+    # Calculate damage and attack modifiers based on entity attributes
     dam_mod = max(0, (attacker.strength - 10) // 2)
     atk_mod = (attacker.dexterity - 10) // 2
     atk = roll + atk_mod
+
     print(f"{attacker.name} rolled a {atk}. {target.name} has an armor class of {target.ac}")
+
     if atk > target.ac:
         damage = roll_dice(attacker.damage) + dam_mod
         target.hp -= damage
@@ -42,9 +46,13 @@ def battle(player, monster, locations):
     Returns:
     - bool: True if the player is killed, False if the monster is killed.
     """
+    # Calculate damage modifiers for player and monster
     player_dam_mod = max(0, (player.strength - 10) // 2)
     monster_dam_mod = max(0, (monster.strength - 10) // 2)
+
     input(f"\nThe battle with the {monster.name} begins! Press enter")
+
+    # Continue the battle until player or monster is defeated
     while True:
         os.system("clear")
         print(f"{player.name} - Health: {player.hp}, Damage: {player.damage} + {player_dam_mod}, Armor Class: {player.ac}")

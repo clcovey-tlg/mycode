@@ -1,13 +1,11 @@
 #!/usr/bin/env python3
 
-# import needed classes and function
 from entity import Entity
 import json
 from pprint import pprint
 from textwrap import fill
 import os
 
-# define location class
 class Location():
     """
     A class used to represent a game location.
@@ -60,7 +58,7 @@ def location_status(locations, current_loc):
     # sets the current location object
     current_loc_entry = locations[current_loc]
  
-    # displayed when player enters a location or looks
+    # displayed when player enters a location
     print(f"You are in {current_loc_entry['name']}")
     print("---------------------------")
     print(fill(current_loc_entry['description'], width=50))
