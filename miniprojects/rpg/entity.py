@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 
 # import necessary modules
-import json
-
+from actions import roll_dice
 
 # define parent class for an entity
 class Entity():
@@ -32,17 +31,20 @@ class Entity():
 
     Methods
     -------
-    says(sound=None)
-        Prints the animals name and what sound it makes
+    __str__()
+        Prints a custom to string for entity
+    move(new_location)
+        Moves entity to a new location
     """
     def __init__(self):
         self.index: str
         self.name: str
         self.group: str
-        self.max_health: int
-        self.health: int
+        self.max_hp: int
+        self.hp: int
         self.strength: int
-        self.dexerity: int
+        self.damage: str
+        self.dexterity: int
         self.ac: int
         self.inventory: list[str] = []
         self.location: str
@@ -50,45 +52,60 @@ class Entity():
     # method to define __str__ for entities
     def __str__(self):
         if self.__class__.__name__ == "Player":
-            line1 = (f"Name: {self.name}, Type: {self.__class__.__name__}, Race: {self.race}\n")
+            print(f"Name: {self.name}, Type: {self.__class__.__name__}, Race: {self.race}")
         else:
-            line1 = (f"Group: {self.group}, Race: {self.race}\n")
-        line2 = ("\x1B[4mStats\x1B[0m\n")
-        line3 = (f"Max Health: {self.max_health}, Current Health: {self.health}\n")
-        line4 = (f"Strength: {self.strength}, Dexterity: {self.dexerity}, Intelligence: {self.intelligence}\n")
+            print(f"NPC: {self.name}, Type: {self.group}")
+        print("\x1B[4mStats\x1B[0m")
+        print(f"Max Health: {self.max_hp}, Current Health: {self.hp}")
+        print(f"Strength: {self.strength}, Damage: {self.damage}")
+        print(f"Dexterity: {self.dexterity}, Armor Class: {self.ac}")
         if self.inventory == []:
-            line5 = (f"Inventory: Empty\n")
+            print(f"Inventory: Empty")
         else:
-            line5 = (f"Inventory: ")
+            print(f"Inventory: ")
             for item in self.inventory:
-                line5 += (f"{item} ")
-            line5 += "\n"
-        line6 = (f"Current Location: {self.location}\n")
-
-        return line1 + line2 + line3 + line4 + line5 + line6
+                print(item)
+        print(f"Current Location: {self.location}")
 
     # method for an entity to move
-    def move(self, new_location):
-        self.location = new_location
+    def move(self, locations, new_location):
+        if self.__class__.__name__ == "Player":
+            self.location = new_location
+        else:
+            locations[self.location]["entities"] #remove from current location
+            self.location = new_location
+            
 
     # method for an entity to attack
-    def attack(self, damage, target):
-        target.health -= damage - (target.dexerity / 3)
+    def attack(self, target):
+        roll = roll_dice()
+        mod = int((self.dexterity - 10) / 2)
+        atk = roll + mod
+        if atk > target.ac:
+            damage = roll_dice(self.damage)
+            target.hp -= damage
+            print(f"You hit the {target.name} for {damage} damage")
+            if target.hp <= 0:
+                print(f"You have killed the {target.name}")
+        else:
+            print("You miss")
 
 # define child class for a monster from entity
 class NPC(Entity):
-    def __init__(self, location):
+    def __init__(self, location: str, damage: str):
         # keep the attributes from Entity
         super().__init__()
         self.index: str
         self.name: str
         self.group: str
-        self.max_health: int
-        self.health: int
+        self.max_hp: int
+        self.hp: int
         self.strength: int
-        self.dexerity: int
+        self.damage: str = damage
+        self.dexterity: int
+        self.ac: int
         self.inventory: list[str] = []
-        self.location: str
+        self.location: str = location
 
 # define child class of player from entity
 class Player(Entity):
@@ -97,16 +114,24 @@ class Player(Entity):
         super().__init__()
         self.race: str = "Human"
         self.name: str = name
-        self.max_health = 20
-        self.strength = 10
-        self.dexerity = 10
-        self.health = self.max_health
+        self.max_hp = 20
+        self.hp = self.max_hp
+        self.strength = 14
+        self.damage: str = "1d6"
+        self.dexterity = 14
+        self.ac: int = 10
+        self.inventory: list[str] = []
         self.location: str = location
+        
 
 def main():
     player = Player("Ezok", "cell")
-    player.inventory.append("sword")
-    print(player.__str__())
+    print(getattr(player, "name"))
+    rat = NPC("none", "1d1")
+    setattr(rat, "hp", 1)
+    setattr(rat, "ac", 11)
+    setattr(rat, "name", "Rat")
+    player.attack(rat)
 
 if __name__ == "__main__":
 	main()

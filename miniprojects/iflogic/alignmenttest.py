@@ -161,15 +161,20 @@ def display_alignment(alignment, descriptions):
     wrapper = textwrap.TextWrapper(width=50)
     descrip = wrapper.fill(text=descriptions[alignment])
     print(descrip)
-    #print(descriptions[alignment])
 
-def main():
+def take_test():
     questions = read_questions()
     descriptions = read_descriptions()
     responses = test(questions)
     results = score_responses(responses)
     alignment = analyze_results(results)
     display_alignment(alignment, descriptions)
+
+    return alignment
+
+def main():
+    alignment = take_test()
+    print(alignment)
 
 if __name__ == "__main__":
 	main()

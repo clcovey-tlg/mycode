@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Monster Displayer</title>
+        <style>
+            body {
+                font-family: "Arial", sans-serif;
+                background-color: #1a1a1a;
+                color: #fff;
+                text-align: center;
+                margin: 50px;
+            }
+
+            h1 {
+                color: #ff9900;
+            }
+
+            table {
+                width: 80%;
+                margin: 20px auto;
+                border-collapse: collapse;
+            }
+
+            th,
+            td {
+                padding: 12px;
+                border: 1px solid #ff9900;
+            }
+
+            th {
+                background-color: #333;
+                color: #ff9900;
+            }
+
+            tr:nth-child(even) {
+                background-color: #555;
+            }
+
+            a {
+                color: #ff9900;
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Monster Displayer</h1>
+        <p>Click the monster's name to display the detail page</p>
+        <p>Return to <a href="/index">Home Page</a>.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th><h3>Name</h3></th>
+                    <th><h3>Category</h3></th>
+                    <th><h3>Hit Points</h3></th>
+                    <th><h3>Strength</h3></th>
+                    <th><h3>Dexterity</h3></th>
+                    <th><h3>Armor Class</h3></th>
+                    <th><h3>Attack Type</h3></th>
+                    <th><h3>Full Original Raw API Data - Link</h3></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for monster in monsters %}
+                <tr>
+                    <td>
+                        <a href='/monster/{{ monster["NAME"] }}'>{{ monster["NAME"] }}</a>
+                    </td>
+                    <td>{{ monster["CATEGORY"] }}</td>
+                    <td>{{ monster["MAX_HP"] }}</td>
+                    <td>{{ monster["STRENGTH"] }}</td>
+                    <td>{{ monster["DEXTERITY"] }}</td>
+                    <td>{{ monster["AC"] }}</td>
+                    <td>{{ monster["ATTACK"] }}</td>
+                    <td>
+                        <a href='https://www.dnd5eapi.co{{ monster["URL"] }}' target="_blank">{{ monster["URL"] }}</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p>Return to <a href="/index">Home Page</a>.</p>
+    </body>
+</html>

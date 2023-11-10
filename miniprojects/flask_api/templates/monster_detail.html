@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Monster Displayer - Details</title>
+        <style>
+            body {
+                font-family: "Arial", sans-serif;
+                background-color: #1a1a1a;
+                color: #fff;
+                text-align: center;
+                margin: 50px;
+            }
+
+            h1 {
+                color: #ff9900;
+            }
+
+            p {
+                font-size: 18px;
+                margin-bottom: 20px;
+            }
+
+            a {
+                color: #ff9900;
+                text-decoration: none;
+            }
+
+            a:hover {
+                text-decoration: underline;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Monster Displayer - Details</h1>
+
+        <div>
+            <h2>{{ monster["NAME"] }}</h2>
+            {% if monster["IMAGE"].startswith("/api") %}
+            <img
+                src="https://www.dnd5eapi.co{{ monster['IMAGE'] }}"
+                alt="api supplied image"
+                width="auto"
+                height="300"
+            />
+            {% else %}
+            <p>Placeholder. No current api image</p>
+            <img
+                src="https://placehold.jp/300x300.png"
+                alt="place holder since no api supplied image"
+                width="auto"
+                height="300"
+            />
+            {% endif %}
+        </div>
+        <div>
+            <p><strong>Category:</strong> {{ monster["CATEGORY"] }}</p>
+            <p><strong>Hit Points:</strong> {{ monster["MAX_HP"] }}</p>
+            <p><strong>Strength:</strong> {{ monster["STRENGTH"] }}</p>
+            <p><strong>Dexterity:</strong> {{ monster["DEXTERITY"] }}</p>
+            <p><strong>Armor Class:</strong> {{ monster["AC"] }}</p>
+            <p><strong>Attack Type:</strong> {{ monster["ATTACK"] }}</p>
+        </div>
+
+        <p>Return to <a href="/monsters">Monster List</a>.</p>
+        <p>Return to <a href="/index">Home Page</a>.</p>
+    </body>
+</html>

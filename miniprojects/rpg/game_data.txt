@@ -3,7 +3,8 @@
 		{	
 			"index": "cell",
 			"name": "your cell",
-			"description": "This is your cell generic description.",
+			"description": "The cell is constructed from weathered stone, its walls worn by the marks of countless prisoners who have passed through its confines.",
+			"details": "Dim torchlight flickers along the cold, damp walls, revealing the coarse texture of the bricks and the rusted iron bars that confine the cell. A narrow, straw-strewn cot occupies one corner, a meager comfort for those awaiting judgment. The air is thick with the scent of mildew and the distant echoes of clanking armor and muffled conversations from the bustling world outside. A heavy, iron door, adorned with a simple, worn latch, stands as the threshold between captivity and freedom. The only window, small and high, allows slivers of pale sunlight to filter through, offering a tantalizing glimpse of the outside world... a world from which you are temporarily severed.",
 			"connections": {
 				"north": "hall"
 				},
@@ -13,7 +14,8 @@
 		{
 			"index": "hall",
 			"name": "the hall",
-			"description": "This is the hall generic description.",
+			"description": "A corridor shrouded in an air of ancient malevolence. Torch sconces line the rough-hewn stone walls, casting flickering shadows that dance like phantom spirits.",
+			"details": "The uneven flagstone floor echoes with the distant drip of water, creating a haunting rhythm that resonates through the subterranean passageway. Cobwebs drape from the corners, evidence of the passage of time undisturbed. The occasional rat scurries in the darkness, its tiny claws echoing through the eerie stillness. To the west you see an empty cell. To the east you see stairs.",
 			"connections": {
 				"east": "stairs",
 				"west": "empty cell"
@@ -24,20 +26,34 @@
 		{
 			"index": "empty cell",
 			"name": "an empty cell",
-			"description": "This is the empty cell generic description.",
+			"description": "The cell is crafted from sturdy stone, worn but well-maintained, its walls revealing the scars of past occupants.",
+			"details": "An empty jail cell, a testament to the ebb and flow of justice in a realm where swords and sorcery shape destinies. A single, barred window allows the pale sunlight to filter through, casting a gentle glow on the cold, stone floor. Along the back wall you notice a stone that appears to be loose. Behind the stone you notice a tunnel.",
 			"connections": {
 				"east": "hall"
 				},
-			"inventory": ["loose stone"],
+			"inventory": [],
 			"entities": {}
 		},
 		{
 			"index": "escape tunnel",
 			"name": "an escape tunnel",
-			"description": "This is the escape tunnel generic description.",
+			"description": "An escape tunnel, a clandestine passage carved through the earth with stealth and determination.",
+			"details": "As you lift the disguised stone slab, a narrow, dimly lit tunnel is revealed—a winding labyrinth of dirt and rock that stretches into the unknown. The air within is damp and cool, carrying the scent of earth and adventure. The uneven walls bear the marks of chipped away stone, evidence of the clandestine efforts to create this secret passageway.",
 			"connections": {
 				"north": "empty cell",
-				"east": "exit"
+				"north-east": "exit"
+				},
+			"inventory": [],
+			"entities": {}
+		},
+		{
+			"index": "stairs",
+			"name": "stairs going up",
+			"description": "The steps are hewn from rough-hewn stone, their surfaces uneven and weathered by the passage of time. Faint traces of moisture cling to the cool walls, adding a subtle sheen to the dimly lit ascent.",
+			"details": "Torches flicker intermittently along the stairwell, casting elongated shadows that dance across the stone surface. The air grows warmer with each step, from the a guard room.",
+			"connections": {
+				"west": "hall",
+				"east": "guard room"
 				},
 			"inventory": [],
 			"entities": {}
@@ -45,13 +61,43 @@
 		{
 			"index": "guard room",
 			"name": "the guard room",
-			"description": "This is the guard room generic description.",
+			"description": "A guard room, a bastion of order amidst the chaotic depths. The room is hewn from rough-hewn stone, its walls adorned with weapons racks displaying an array of worn blades and sturdy shields.",
+			"details": "A large, oak table dominates the center of the room, strewn with maps, parchments, and half-empty tankards. Wooden stools surround the table, bearing the marks of countless hours of vigilant watch. At the head of the table, a grizzled guard captain surveys the surroundings, a map of the dungeon spread out before them, tracing the paths of both prisoners and potential threats.",
 			"connections": {
 				"west": "stairs",
 				"east": "exit"
 				},
 			"inventory": [],
 			"entities": {}
+		},
+		{
+			"index": "exit",
+			"name": "the exit",
+			"description": "You find yourself standing before the exit—a portal to the outside world that beckons with the promise of liberation.",
+			"details": "The exit is framed by an ancient, towering archway, its stones weathered by the passage of time and the weight of countless adventures. A soft, ambient light spills through the opening, revealing a stark contrast to the dimly lit passages you leave behind. The air is fresh, carrying the scent of pine and earth, a welcome departure from the dungeon's stale atmosphere. To the west you see a guard room. To the south-west you see an escape tunnel",
+			"connections": {
+				"west": "guard room",
+				"south-west": "escape tunnel"
+				},
+			"inventory": [],
+			"entities": {}
 		}
+	],
+	"npcs": [
+		{
+			"index": "rat",
+			"location": "escape tunnel",
+			"details": "",
+			"damage": "1d1"
+		},
+		{
+			"index": "guard",
+			"location": "guard room",
+			"details": "",
+			"damage": "1d6"
+		}
+	],
+	"items": [
+
 	]
 }
