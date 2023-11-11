@@ -4,12 +4,13 @@
 			"index": "cell",
 			"name": "your cell",
 			"description": "The cell is constructed from weathered stone, its walls worn by the marks of countless prisoners who have passed through its confines.",
-			"details": "Dim torchlight flickers along the cold, damp walls, revealing the coarse texture of the bricks and the rusted iron bars that confine the cell. A narrow, straw-strewn cot occupies one corner, a meager comfort for those awaiting judgment. The air is thick with the scent of mildew and the distant echoes of clanking armor and muffled conversations from the bustling world outside. A heavy, iron door, adorned with a simple, worn latch, stands as the threshold between captivity and freedom. The only window, small and high, allows slivers of pale sunlight to filter through, offering a tantalizing glimpse of the outside world... a world from which you are temporarily severed.",
+			"details": "Dim torchlight flickers along the cold, damp walls, revealing the coarse texture of the bricks and the rusted iron bars that confine the cell. A narrow, straw-strewn cot occupies one corner, a meager comfort for those awaiting judgment. The air is thick with the scent of mildew and the distant echoes of clanking armor and muffled conversations from the bustling world outside. A heavy, iron door, adorned with a simple, worn latch, stands as the threshold between captivity and freedom. The only window, small and high, allows slivers of pale sunlight to filter through, offering a tantalizing glimpse of the outside world... a world from which you are temporarily severed. Below your bed you notice a set of thieves' tools",
 			"connections": {
 				"north": "hall"
 				},
 			"inventory": [],
-			"entities": {}
+			"entities": {},
+			"searched": false
 		},
 		{
 			"index": "hall",
@@ -19,10 +20,12 @@
 			"connections": {
 				"east": "stairs",
 				"west": "empty cell",
+				"north": "locked door",
 				"south": "cell"
 				},
 			"inventory": [],
-			"entities": {}
+			"entities": {},
+			"searched": false
 		},
 		{
 			"index": "empty cell",
@@ -33,7 +36,8 @@
 				"east": "hall"
 				},
 			"inventory": [],
-			"entities": {}
+			"entities": {},
+			"searched": false
 		},
 		{
 			"index": "escape tunnel",
@@ -45,7 +49,8 @@
 				"north-east": "exit"
 				},
 			"inventory": [],
-			"entities": {}
+			"entities": {},
+			"searched": false
 		},
 		{
 			"index": "stairs",
@@ -57,7 +62,20 @@
 				"east": "guard room"
 				},
 			"inventory": [],
-			"entities": {}
+			"entities": {},
+			"searched": false
+		},
+		{
+			"index": "storeroom",
+			"name": "a storeroom",
+			"description": "a chamber of forgotten provisions and discarded relics. The air within is thick with the scent of must and decay, a testament to the passage of time and neglect. Dim torchlight reveals dusty shelves lined with crates and barrels.",
+			"details": "Rows of wooden shelves groan under the weight of forgotten supplies—crates of rations, rusting weapons, and tattered rolls of parchment. Barrels, their lids worn and cracked, hold the remnants of long-expired provisions, their contents now lost to the ravages of time. A skeletal handcart stands abandoned in a corner, its wheel creaking as it sways gently in the stagnant air. In the midst of the disarray, a lone chest sits, its lid slightly ajar, revealing the glint of forgotten treasures within. In the chest you find a longsword and a shield. You see the hall to the south.",
+			"connections": {
+				"south": "hall"
+				},
+			"inventory": [],
+			"entities": {},
+			"searched": false
 		},
 		{
 			"index": "guard room",
@@ -69,7 +87,8 @@
 				"east": "exit"
 				},
 			"inventory": [],
-			"entities": {}
+			"entities": {},
+			"searched": false
 		},
 		{
 			"index": "exit",
@@ -81,7 +100,20 @@
 				"south-west": "escape tunnel"
 				},
 			"inventory": [],
-			"entities": {}
+			"entities": {},
+			"searched": false
+		},
+		{
+			"index": "locked door",
+			"name": "a locked door",
+			"description": " A formidable locked door guards the passage to the next room. A thick layer of dust clings to the intricate ironwork, forming a ghostly pattern that accentuates the door's ornate design.",
+			"details": "Crafted from solid iron, the door bears the weight of its age with a stoic demeanor, its surface etched with the scars of countless attempts to breach its defenses. The air surrounding the door is heavy with an aura of mystery, as if the secrets of the dungeon lie just beyond its imposing frame.",
+			"connections": {
+				"south": "hall"
+				},
+			"inventory": [],
+			"entities": {},
+			"searched": false
 		}
 	],
 	"npcs": [
@@ -99,6 +131,31 @@
 		}
 	],
 	"items": [
-
+		{
+			"category": "armor",
+			"index": "shield",
+			"name": "shield",
+			"description": "a generic shield description",
+			"url": "/api/equipment/shield",
+			"ac": "1",
+			"location": "storeroom"
+		},
+		{
+			"category": "weapon",
+			"index": "longsword",
+			"name": "longsword",
+			"description": "a generic long sword description",
+			"url": "/api/equipment/longsword",
+			"damage": "1d8",
+			"location": "storeroom"
+		},
+		{
+			"category": "tool",
+			"index": "thieves tools",
+			"name": "thieves' tools",
+			"description": "thieves' tools to help you... you know",
+			"url": "/api/equipment/thieves-tools",
+			"location": ""
+		}
 	]
 }

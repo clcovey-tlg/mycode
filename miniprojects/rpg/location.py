@@ -2,7 +2,6 @@
 
 from entity import Entity
 import json
-from pprint import pprint
 from textwrap import fill
 import os
 
@@ -41,6 +40,7 @@ class Location():
         self.connections: dict[str, str] = connections
         self.inventory: list[str] = inventory
         self.entities: list[str] = []
+        self.searched: bool = False
 
 def location_status(locations, current_loc):
     """
@@ -68,7 +68,7 @@ def location_status(locations, current_loc):
         print(f"\tYou see {locations[value]['name']} to the {key}")
     print("---------------------------")
     # prints out the rooms inventory or nothing is inventory is empty
-    if current_loc_entry["inventory"] != []:
+    if len(current_loc_entry["inventory"]) > 0:
         print("You see the following items:")
         for item in current_loc_entry["inventory"]:
             print(item)
@@ -92,7 +92,8 @@ def location_search(locations, current_loc):
     """
     current_loc_entry = locations[current_loc]
     os.system("clear")
-    print("Your take a closer look at your surrondings...")
+    if current_loc != "exit":
+        print("Your take a closer look at your surrondings...")
     print(fill(current_loc_entry['details'], width=50))
     print("\n")
 
@@ -110,9 +111,8 @@ def load_locations():
         # reads locations from game_data.txt and saves in a locations dict
         locations = {}
         for location in game_data["locations"]:
-            loc_name = location["index"]
-            locations[loc_name] = location
-    
+            locations[location["index"]] = location
+
     return locations
 
 def main():

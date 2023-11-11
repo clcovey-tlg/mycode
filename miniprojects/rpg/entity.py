@@ -28,10 +28,13 @@ class Entity():
 
     Methods
     -------
-    __str__()
+    display()
         Prints a custom to string for entity
     move(new_location)
         Moves entity to a new location
+    get_item(locations, items, item_name)
+        Adds an item to the entity's inventory if it exists in the current location,
+        and updates entity attributes based on the item's category.
     """
     def __init__(self):
         self.index: str
@@ -83,6 +86,27 @@ class Entity():
         else:
             locations[self.location]["entities"] #remove from current location
             self.location = new_location
+
+    def get_item(self, locations, items, item_name):
+        """
+        Adds an item to the entity's inventory if it exists in the current location,
+        and updates entity attributes based on the item's category.
+
+        Parameters:
+        - locations: The dictionary containing information about locations in the game.
+        - items: The dictionary containing information about available items in the game.
+        - item_name: The name of the item to be added to the entity's inventory.
+        """
+        item_list = locations[self.location]["inventory"]
+        if item_name in item_list:
+            self.inventory.append(item_name)
+            locations[self.location]["inventory"].remove(item_name)
+            item = items[item_name]
+            if item["category"] == "weapon":
+                self.damage = item["damage"]
+            if item["category"] == "armor":
+                self.ac += int(item["ac"])
+
 
 # define child class for a monster from entity
 class NPC(Entity):

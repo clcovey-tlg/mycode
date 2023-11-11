@@ -153,6 +153,31 @@ def generate_player():
 
     return player
 
+def load_items(locations):
+    with open("game_data.txt", "r") as data:
+        #reads data file object as json
+        game_data = json.load(data)
+            
+        # reads locations from game_data.txt and saves in a npcs dict
+        items = {}
+        for item in game_data["items"]:
+            index = item["index"]
+            category = item["category"]
+            generated_item = {}
+            generated_item["category"] = category
+            generated_item["index"] = index
+            generated_item["name"] = item["name"]
+            generated_item["description"] = item["description"]
+            if category == "weapon":
+                generated_item["damage"] = item["damage"]
+            if category == "armor":
+                generated_item["ac"] = item["ac"]
+            if item["location"] != "":
+                locations[item["location"]]["inventory"].append(index)
+            items[index] = generated_item
+    return items
+
+
 def main():
     """
     Main function for testing purposes.

@@ -31,16 +31,6 @@ def roll_dice(roll: str = "1d20"):
 def showInstructions():
     """
     Displays game instructions and player stats.
-
-    Commands:
-    - move [direction]
-    - search (examines current location in more detail)
-
-    Player Stats:
-    - Strength: Makes you do more damage (extra damage)
-    - Dexterity: Makes you harder to hit (extra armor class)
-      - The bonus is equal to (stat - 10) / 2
-        For example, a strength of 14 will give +2 damage - (14 - 10) / 2
     """
     os.system("clear")
     # Display game instructions and information concerning player stats
@@ -48,11 +38,17 @@ def showInstructions():
     The Escape
     ==========
     You awake in a prison cell and are unsure how you got there.
-    Try to gain your freedom.
+    Try to gain your freedom by reaching the exit
+    
     Commands:
       move [direction]
+          example: move north
+      get [item]
+          example: get broom
+      use [item]
+          example: use broom
       search
-          *this examines your current location in more detail
+          this examines your current location in more detail
 
     Players Stats
     =============
@@ -61,6 +57,10 @@ def showInstructions():
       easier for you to hit others
           * The bonus is equal to (stat - 10) / 2
             For example, a strenth of 14 will give +2 damage - (14 - 10) / 2
+          
+    Notes
+    =====
+    Beware of the monsters that will attempt to end your life
     ''')
     input("Press Enter to continue")
     os.system("clear")
